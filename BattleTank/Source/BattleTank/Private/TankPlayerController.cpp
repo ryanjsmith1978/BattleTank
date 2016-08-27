@@ -10,6 +10,8 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	auto ControlledTank = GetControlledTank();
+	CrosshairXLocation = 0.5f;
+	CrosshairYLocation = 0.352f;
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -22,8 +24,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	if (GetPawn() != nullptr)
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("The pawn controlled by the player is : %s"), *GetPawn()->GetName());
+	{		
 		return Cast<ATank>(GetPawn());
 	}
 	else
@@ -46,13 +47,18 @@ void ATankPlayerController::AimTowardsCrosshair()
 	if (IsActorHit)
 	{
 		// Tell controlled tank to aim at this point
-		UE_LOG(LogTemp, Warning, TEXT("The RayCast hit at point : %s"), *HitLocation_OUT.ToString())
+		
 	}	
 }
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation_OUT) const
 {
 	auto MyPlayerController = GetWorld()->GetFirstPlayerController();
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);		
+	
+
 	FHitResult Hit;
 	FVector PlayerViewPointLoc;
 	FRotator PlayerViewPointRot;

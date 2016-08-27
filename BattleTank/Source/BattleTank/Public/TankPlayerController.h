@@ -16,6 +16,9 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	
 public:
 
+
+private:
+
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
@@ -25,5 +28,11 @@ public:
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector &HitLocation_OUT) const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Crosshairs", meta = (AllowPrivateAccess = "true"))
+	float CrosshairXLocation;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Crosshairs", meta = (AllowPrivateAccess = "true"))
+	float CrosshairYLocation;
+		
 };
