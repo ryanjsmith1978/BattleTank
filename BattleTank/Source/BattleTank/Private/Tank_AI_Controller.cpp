@@ -14,13 +14,15 @@ void ATank_AI_Controller::BeginPlay()
 {
 	AI_ControlledTank = Get_AIPawn();
 
-	if (AI_ControlledTank != nullptr)
+	PlayerPawnTank = GetPlayerTank();
+
+	if (PlayerPawnTank != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AI Controlled Tank Pawn is : %s"), *GetPawn()->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *PlayerPawnTank->GetName());
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No AI Controlled Tank found"));
+		UE_LOG(LogTemp, Warning, TEXT("No Player Pawn Tank found"));
 	}
 
 }
@@ -28,4 +30,18 @@ void ATank_AI_Controller::BeginPlay()
 ATank* ATank_AI_Controller::Get_AIPawn()
 {
 	return Cast<ATank>(GetPawn());
+}
+
+ATank * ATank_AI_Controller::GetPlayerTank() const
+{
+	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+
+	if (PlayerPawn != nullptr)
+	{
+		return Cast<ATank>(PlayerPawn);
+	}
+	else
+	{
+		return nullptr;
+	}
 }

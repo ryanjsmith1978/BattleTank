@@ -23,7 +23,13 @@ class BATTLETANK_API ATank_AI_Controller : public AAIController
 	// returns the Pawn associated with an AI Controller
 	ATank* Get_AIPawn();
 
+	// returns the player pawn tank
+	ATank* GetPlayerTank() const;
+
 	// ATank pointer points to an AI controlled tank if available, otherwise null
 	ATank* AI_ControlledTank = nullptr;
+
+	// ATank pointer points to the player pawn tank
+	ATank* PlayerPawnTank = nullptr;
 	
 };

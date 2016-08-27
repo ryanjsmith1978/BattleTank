@@ -17,7 +17,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 {
 	if (GetPawn() != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The pawn controlled by the player is : %s"), *GetPawn()->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("The pawn controlled by the player is : %s"), *GetPawn()->GetName());
 		return Cast<ATank>(GetPawn());
 	}
 	else
