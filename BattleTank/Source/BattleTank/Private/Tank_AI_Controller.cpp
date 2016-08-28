@@ -12,13 +12,11 @@ ATank_AI_Controller::ATank_AI_Controller()
 
 void ATank_AI_Controller::BeginPlay()
 {
-	AI_ControlledTank = Get_AIPawn();
+	Super::BeginPlay();
 
-	PlayerPawnTank = GetPlayerTank();
-
-	if (PlayerPawnTank != nullptr)
+	if (GetPlayerTank() != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *PlayerPawnTank->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *Get_AIPawn()->GetName());
 	}
 	else
 	{
@@ -27,7 +25,16 @@ void ATank_AI_Controller::BeginPlay()
 
 }
 
-ATank* ATank_AI_Controller::Get_AIPawn()
+void ATank_AI_Controller::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		Get_AIPawn()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
+ATank* ATank_AI_Controller::Get_AIPawn() const
 {
 	return Cast<ATank>(GetPawn());
 }
