@@ -16,11 +16,11 @@ void ATank_AI_Controller::BeginPlay()
 
 	if (GetPlayerTank() != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *Get_AIPawn()->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *Get_AIPawn()->GetName());
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No Player Pawn Tank found"));
+		//UE_LOG(LogTemp, Warning, TEXT("No Player Pawn Tank found"));
 	}
 
 }
