@@ -53,7 +53,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	// if true, then call move barrel towards passing in the vectors out parameter LaunchVelocity GetSafeNormal() - AimDirection
 
 	// Calculates an launch velocity for a projectile to hit a specified point. 
-	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity_OUT, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace))
+	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity_OUT, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::TraceFullPath))
 	{
 		auto AimDirection = LaunchVelocity_OUT.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);

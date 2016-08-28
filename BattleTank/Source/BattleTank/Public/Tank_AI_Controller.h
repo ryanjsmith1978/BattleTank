@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "AIController.h"
 #include "Tank_AI_Controller.generated.h"
 
@@ -23,9 +22,9 @@ class BATTLETANK_API ATank_AI_Controller : public AAIController
 	virtual void Tick(float DeltaTime) override;
 	
 	// returns the Pawn associated with an AI Controller
-	ATank* Get_AIPawn() const;
+	class ATank* Get_AIPawn() const;
 
 	// returns the player pawn tank
-	ATank* GetPlayerTank() const;
+	class ATank* GetPlayerTank() const;
 
 };

@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
@@ -23,7 +22,7 @@ private:
 
 	virtual void Tick(float DeltaTime) override;
 	
-	ATank* GetControlledTank() const;
+	class ATank* GetControlledTank() const;
 
 	void AimTowardsCrosshair();
 
