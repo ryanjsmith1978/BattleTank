@@ -24,9 +24,12 @@ public:
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+	void MoveBarrelTowards(FVector AimDirection);
 		
 private:
 	
+	// Barrel StaticMesh declared here, defined in tank.cpp by referencing this function indirectly, and then the BP actually sets/call the func.
 	UStaticMeshComponent* Barrel = nullptr;
 	
 };

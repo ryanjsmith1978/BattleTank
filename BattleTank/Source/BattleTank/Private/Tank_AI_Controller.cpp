@@ -30,7 +30,7 @@ void ATank_AI_Controller::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (GetPlayerTank())
 	{
-		Get_AIPawn()->AimAt(GetPlayerTank()->GetActorLocation());
+		//Get_AIPawn()->AimAt(GetPlayerTank()->GetActorLocation());
 	}
 }
 
