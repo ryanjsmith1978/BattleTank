@@ -39,52 +39,62 @@ void ATankPlayerController::AimTowardsCrosshair()
 	// if pawn is null, return (get out of this function)
 	if (!GetControlledTank()) { return; }
 	
-	// Get world location if LineTrace through crosshair
+	// Get world location if LineTrace through cross hair
 	FVector HitLocation_OUT; // Out Parameter
 	bool IsActorHit = GetSightRayHitLocation(HitLocation_OUT);
-
+	
 	// if it hits the landscape
 	if (IsActorHit)
-	{
+	{		
 		// Tell controlled tank to aim at this point
-		
+		GetControlledTank()->AimAt(HitLocation_OUT);
 	}	
 }
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation_OUT) const
+
+bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation_OUT)
 {
-	auto MyPlayerController = GetWorld()->GetFirstPlayerController();
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
-	auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);		
+	auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 	
-
-	FHitResult Hit;
-	FVector PlayerViewPointLoc;
-	FRotator PlayerViewPointRot;
-	float Reach = 5000.0f;
-
-	if (MyPlayerController != nullptr)
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		MyPlayerController->GetPlayerViewPoint(PlayerViewPointLoc, PlayerViewPointRot);
-		FVector LineTraceEnd = PlayerViewPointRot.Vector() * Reach + PlayerViewPointLoc;
-		FCollisionQueryParams TraceParams(TEXT(""), false, GetOwner());
-		FCollisionResponseParams ResponseParams(ECR_Block);
-
-		GetWorld()->LineTraceSingleByChannel(Hit, HitLocation_OUT, LineTraceEnd, ECC_Visibility, TraceParams, ResponseParams);
-		auto Actor = Hit.GetActor();
-		HitLocation_OUT = Hit.Location;
-		
-		if (Actor != nullptr)
-		{			
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		GetLookVectorHitLocation(LookDirection, HitLocation_OUT);
+		return true;
 	}
 	else
-		return false;	
+		return false;
 }
 
+// mutates unit vector and position for the ray trace
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection)
+{	
+	FVector LookLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, LookLocation, LookDirection);
+}
+
+//  if get look direction is true, we need to trace using screen location and LookDirection
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation_OUT)
+{
+	LineTraceRange = 1000000.0f;
+	FVector LineTraceStart = PlayerCameraManager->GetCameraLocation();
+	FVector LineTraceEnd = LineTraceStart + (LookDirection * LineTraceRange);
+	FHitResult Hit;
+
+	GetWorld()->LineTraceSingleByChannel(Hit, LineTraceStart, LineTraceEnd, ECollisionChannel::ECC_Visibility);
+	
+	auto Actor = Hit.GetActor();
+	if (Actor != nullptr)
+	{
+		HitLocation_OUT = Hit.Location;
+		return true;
+	}
+	else
+	{
+		HitLocation_OUT = FVector(0);
+		return false;
+	}
+}

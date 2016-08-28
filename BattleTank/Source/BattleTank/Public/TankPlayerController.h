@@ -27,12 +27,19 @@ private:
 
 	void AimTowardsCrosshair();
 
-	bool GetSightRayHitLocation(FVector &HitLocation_OUT) const;
+	bool GetSightRayHitLocation(FVector &HitLocation_OUT);
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection);
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation_OUT);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Crosshairs", meta = (AllowPrivateAccess = "true"))
 	float CrosshairXLocation;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Crosshairs", meta = (AllowPrivateAccess = "true"))
 	float CrosshairYLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Crosshairs", meta = (AllowPrivateAccess = "true"))
+	float LineTraceRange;
 		
 };
