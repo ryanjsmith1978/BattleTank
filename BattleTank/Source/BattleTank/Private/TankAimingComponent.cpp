@@ -49,17 +49,18 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	FVector LaunchVelocity_OUT;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("FireLocation"));
 
-	// Calculate the Out Launch Velocity
-	 // if (true), calculate OutVelocity
+	// Calculate the Out Launch Velocity 
+	// if true, then call move barrel towards passing in the vectors out parameter LaunchVelocity GetSafeNormal() - AimDirection
 
+	// Calculates an launch velocity for a projectile to hit a specified point. 
 	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity_OUT, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		auto AimDirection = LaunchVelocity_OUT.GetSafeNormal();
-		auto TankName = GetOwner()->GetName();		
 		MoveBarrelTowards(AimDirection);
 	}
 }
 
+// Call the barrel class for specific barrel properties to make the shot
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	// work out difference between current barrel rotation and AimDirection
