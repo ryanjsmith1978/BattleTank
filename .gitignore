@@ -12,4 +12,5 @@ BattleTank/BuildingEscape.sdf
 # VS Generated
 ##############
 *.VC.db
+*.VC.opendb
 BattleTank/BattleTank.sdf
