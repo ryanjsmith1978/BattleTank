@@ -19,5 +19,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
+
+	// Max forward force to the tank body that is at the position of the track's origin.
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	float MaxDrivingForce;
+
+
 	
 };
