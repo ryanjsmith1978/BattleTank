@@ -80,11 +80,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	// work out difference between current AimDirection and barrel rotation
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
-	
-
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
-	
-	
+		
 	// given a max elevation speed, and the frame time
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
