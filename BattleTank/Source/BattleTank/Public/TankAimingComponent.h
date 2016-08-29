@@ -25,12 +25,16 @@ public:
 
 	void SetBarrelReference(class UTankBarrel* BarrelToSet);
 
+	void SetTurretReference(class UTankTurret* TurretToSet);
+
 	void MoveBarrelTowards(FVector AimDirection);
 		
 private:
 	
 	// Barrel StaticMesh declared here, defined in tank.cpp by referencing this function indirectly, and then the BP actually sets/call the func.
 	class UTankBarrel* Barrel = nullptr;
+
+	class UTankTurret* Turret = nullptr;
 	
 
 };

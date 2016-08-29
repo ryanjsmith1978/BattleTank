@@ -2,6 +2,7 @@
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 
 // #include "Kismet/GameplayStatics.h"
@@ -42,6 +43,12 @@ void UTankAimingComponent::SetBarrelReference(class UTankBarrel* BarrelToSet)
 }
 
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+}
+
+
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) { return; }
@@ -55,13 +62,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	// Calculates an launch velocity for a projectile to hit a specified point. 
 	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity_OUT, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
-		auto AimDirection = LaunchVelocity_OUT.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("AimDirection is : %s"), *LaunchVelocity_OUT.ToString())
+		auto AimDirection = LaunchVelocity_OUT.GetSafeNormal();		
 		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AimDirection is : %s"), *LaunchVelocity_OUT.ToString())
+		UE_LOG(LogTemp, Warning, TEXT("AimDirection is : { 0, 0, 0}"));
 	}
 
 }
@@ -77,6 +83,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 	// given a max elevation speed, and the frame time
 	
-	Barrel->Elevate(1);
+	Barrel->Elevate(DeltaRotator.Pitch);
 		
 }
