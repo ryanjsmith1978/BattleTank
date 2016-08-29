@@ -11,14 +11,17 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-
-	void AimAt(FVector HitLocation);
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetBarrelReference(class UTankBarrel* BarrelToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetTurretReference(class UTankTurret* TurretToSet);
+
+	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = "FIRING")
+	void Fire();
 
 protected:
 
@@ -39,5 +42,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 5000.0f; // starting projectile launch speed
+
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	TSubclassOf<class AProjectile> ProjectileBlueprint;
+
+	class UTankBarrel* TankBarrel = nullptr;
 	
 };

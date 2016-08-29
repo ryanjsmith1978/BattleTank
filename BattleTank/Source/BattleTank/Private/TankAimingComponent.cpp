@@ -63,14 +63,13 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (UGameplayStatics::SuggestProjectileVelocity(this, LaunchVelocity_OUT, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		auto AimDirection = LaunchVelocity_OUT.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Launch Velocity Vector is : %s and it's Normal Value is : %s"), 
-			*LaunchVelocity_OUT.ToString(), *AimDirection.ToString());
-		
+		//UE_LOG(LogTemp, Warning, TEXT("Launch Velocity Vector is : %s and it's Normal Value is : %s"), 
+			//*LaunchVelocity_OUT.ToString(), *AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AimDirection is : { 0, 0, 0}"));
+		//UE_LOG(LogTemp, Warning, TEXT("AimDirection is : { 0, 0, 0}"));
 	}
 
 }
