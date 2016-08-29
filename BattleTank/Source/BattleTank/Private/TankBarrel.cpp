@@ -10,7 +10,7 @@ UTankBarrel::UTankBarrel()
 
 void UTankBarrel::Elevate(float RelativeSpeed)
 {
-	// move the barrel the right amount this frame
+	// move the Turret the right amount this frame
 	// given a max elevation speed, and the frame time
 	RelativeSpeed = FMath::Clamp(RelativeSpeed, -1.0f, 1.0f);
 	float ElevationChange = RelativeSpeed * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;

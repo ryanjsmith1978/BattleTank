@@ -14,7 +14,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
@@ -88,6 +88,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 	// given a max elevation speed, and the frame time
 	Barrel->Elevate(DeltaRotator.Pitch);
+	Turret->Rotate(DeltaRotator.Yaw);
 }
 
 // A launch velocity is equivalent to a velocity vector which includes the magnitude (the speed), and the direction
