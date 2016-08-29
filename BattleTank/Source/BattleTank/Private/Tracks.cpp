@@ -12,7 +12,7 @@ UTracks::UTracks()
 void UTracks::SetThrottle(float Throttle)
 {
 	FString Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s throttle is : %f"), *Name, Throttle);
+	//UE_LOG(LogTemp, Warning, TEXT("%s throttle is : %f"), *Name, Throttle);
 
 	// Calculate force applied by whatever direction the tank is facing
 	FVector ForceApplied = GetForwardVector() * Throttle * MaxDrivingForce;
