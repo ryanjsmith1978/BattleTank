@@ -12,43 +12,30 @@ ATank_AI_Controller::ATank_AI_Controller()
 
 void ATank_AI_Controller::BeginPlay()
 {
-	Super::BeginPlay();
-
-	if (GetPlayerTank() != nullptr)
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("Player Tank Pawn is : %s"), *Get_AIPawn()->GetName());
-	}
-	else
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("No Player Pawn Tank found"));
-	}
-
+	Super::BeginPlay();	
 }
 
 void ATank_AI_Controller::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (GetPlayerTank())
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
+
+	if (PlayerTank)
 	{
-		//Get_AIPawn()->AimAt(GetPlayerTank()->GetActorLocation());
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+		ControlledTank->Fire(); // TODO limit firing rate
 	}
 }
 
 ATank* ATank_AI_Controller::Get_AIPawn() const
 {
-	return Cast<ATank>(GetPawn());
+	auto AIPawn = Cast<ATank>(GetPawn());
+	return AIPawn;
 }
 
-ATank * ATank_AI_Controller::GetPlayerTank() const
+ATank* ATank_AI_Controller::GetPlayerTank() const
 {
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-
-	if (PlayerPawn != nullptr)
-	{
-		return Cast<ATank>(PlayerPawn);
-	}
-	else
-	{
-		return nullptr;
-	}
+	auto PlayerPawn = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	return PlayerPawn;
 }

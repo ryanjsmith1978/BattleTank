@@ -14,13 +14,16 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(TEXT("TankAimingComponent"));
+	ReloadTimeInSeconds = 2.0f;
 }
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	LaunchSpeed = 7500.0f;
+	LastFireTime = 0.0f;	
 }
 
 // Called every frame
@@ -58,23 +61,29 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Firing Projectile"))
+	//UE_LOG(LogTemp, Warning, TEXT("Firing Projectile"))
+
+	bool isReloaded = (GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeInSeconds;
 	
-	if (!TankBarrel) { return; }
+	if (TankBarrel && isReloaded)
+	{
+		// Spawn a projectile at the location at the barrel
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = Instigator;
 
-	// Spawn a projectile at the location at the barrel
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.Instigator = Instigator;
+		FVector SpawnLocation = TankBarrel->GetSocketLocation("FireLocation");
+		FRotator SpawnRotation = TankBarrel->GetSocketRotation("FireLocation");
 
-	FVector SpawnLocation = TankBarrel->GetSocketLocation("FireLocation");
-	FRotator SpawnRotation = TankBarrel->GetSocketRotation("FireLocation");
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation, SpawnParams);
 
-	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation, SpawnParams);
-
-	Projectile->LaunchProjectile(LaunchSpeed);
-
-
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = GetWorld()->GetTimeSeconds();
+	}
+	else
+	{
+		return;
+	}
 
 }
 
