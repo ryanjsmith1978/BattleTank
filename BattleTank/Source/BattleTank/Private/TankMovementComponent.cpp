@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
 #include "TankMovementComponent.h"
@@ -45,7 +44,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	FVector RightThrow = FVector::CrossProduct(ForwardNormal, VelocityNormal);
 	float RotationChange = RightThrow.Z;
 	IntendMoveRight(RotationChange);
-
 }
 
 

@@ -1,0 +1,16 @@
+
+APlayerController();
+
+beginplay();
+
+tick();
+
+ATank* GetControlledTank();
+
+void AimTowardsCrosshair();
+
+bool RayCastHit(fVector &HitLocation_OUT);
+
+bool GetLookDirection(FVector2d ScreenLocation, FVector &LookDirection);
+
+bool GetVectorHitLocation(FVector LookDirection, FVector &HitLocation_OUT);
