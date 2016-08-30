@@ -15,14 +15,14 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	
 public:
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	class ATank* GetControlledTank() const;
 
 private:
 
 	virtual void BeginPlay() override;
 
-	virtual void Tick(float DeltaTime) override;
-	
-	class ATank* GetControlledTank() const;
+	virtual void Tick(float DeltaTime) override;	
 
 	void AimTowardsCrosshair();
 

@@ -17,6 +17,8 @@ public:
 	
 	UTracks();
 
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	FORCEINLINE float GetMaxDrivingForce() { return MaxDrivingForce; }
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
