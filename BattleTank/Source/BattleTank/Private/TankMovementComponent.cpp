@@ -27,3 +27,10 @@ void UTankMovementComponent::IntendMoveRight(float Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	FString VelocityString = MoveVelocity.GetSafeNormal().ToString();
+
+	UE_LOG(LogTemp, Warning, TEXT("%s request move velocity is %s"), *GetOwner()->GetName(), *VelocityString);
+}

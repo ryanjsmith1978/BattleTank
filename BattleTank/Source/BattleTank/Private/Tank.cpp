@@ -17,6 +17,9 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(TEXT("TankAimingComponent"));
 	//TankMovement = CreateDefaultSubobject<UTankMovementComponent>(TEXT("TankMovement"));
 	ReloadTimeInSeconds = 2.0f;
+	LaunchSpeed = 7500.0f;
+	LastFireTime = 0.0f;
+	AcceptanceRadius = 3000.0f;
 }
 
 // Called when the game starts or when spawned
@@ -24,8 +27,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	LaunchSpeed = 7500.0f;
-	LastFireTime = 0.0f;	
+		
 }
 
 // Called every frame
@@ -87,5 +89,10 @@ void ATank::Fire()
 		return;
 	}
 
+}
+
+float ATank::GetAcceptanceRadius()
+{
+	return AcceptanceRadius;
 }
 

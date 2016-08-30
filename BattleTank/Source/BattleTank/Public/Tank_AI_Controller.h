@@ -27,4 +27,6 @@ class BATTLETANK_API ATank_AI_Controller : public AAIController
 	// returns the player pawn tank
 	class ATank* GetPlayerTank() const;
 
+	
+
 };

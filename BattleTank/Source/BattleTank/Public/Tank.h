@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "FIRING")
 	void Fire();
 
+	UFUNCTION(BlueprintPure, Category = "Firing")
+	float GetAcceptanceRadius();
+
 protected:
 
 	class UTankAimingComponent* TankAimingComponent = nullptr;
@@ -40,14 +43,19 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	
+
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed; // starting projectile launch speed
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	TSubclassOf<class AProjectile> ProjectileBlueprint;
 
-	UPROPERTY(EditAnywhere, Category = "Firing")
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float AcceptanceRadius;
 
 	double LastFireTime;
 
