@@ -1,0 +1,54 @@
+Void ATankPlayerController::AimTowardsCrosshair()
+{
+	if(!GetControlledTank()){return;}	
+
+	FVector HitLocation_OUT;
+	if(RayCastHit(HitLocation_OUT))
+	print raycast location;
+
+}
+
+bool ATankPlayerController::RayCastHit(FVector &HitLocation_OUT)
+{
+	float CrosshairXLocation = 0.5f;
+	float CrosshairYLocation = .352f;
+	int32 ViewPortXLocation;
+	int32 ViewPortYLocation;
+	GetViewPortSize(ViewPortXLocation, ViewPortYLcoation);
+
+	FVector2d ScreenLocation = FVector2d(ViewPortXLocation * CrosshairXLocation, ViewPortYLocation * CrosshairYLocation);
+	FVector LookDirection; 
+	
+	if(GetLookDirection(ScreenLocation, LookDirection)
+	{
+		if (GetVectorHitLocation(LookDirection, HitLocation_OUT))
+			return true;			
+	}
+	
+	return false;
+}
+
+bool ATankPlayerController::GetLookDirection (FVector2d ScreenLocation, FVector &LookDirection)
+{
+	FVector LookLocation
+	return DeProjectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, LookLocation, LookDirection);
+}
+
+bool ATankPlayerController::GetVectorHitLocation(FVector LookDirection, FVector &HitLocation_OUT)
+{
+	float LineTraceLength = 1000000.f;
+	FVector LineTraceStart = PlayerCameraManager->GetCameraLocation();	
+	FVector LineTraceEnd = LineTraceStart + (LookDirection * LineTraceLength);
+	FHitResult Hit;
+	
+	GetWorld()->LineTraceSingleByChannel(Hit, LineTraceStart, LineTraceEnd, FCollisionChannel::ECC_Visibility);
+	auto Actor = hit.getactor();
+
+	if(actor != nullptr)
+	{
+		HitLocation_OUT = Actor.Location;
+		return true;
+	}
+	else	
+		return false;
+}

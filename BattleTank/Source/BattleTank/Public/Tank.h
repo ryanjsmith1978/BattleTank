@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -28,6 +27,7 @@ public:
 
 protected:
 
+	UPROPERTY(BlueprintReadOnly)
 	class UTankAimingComponent* TankAimingComponent = nullptr;
 	
 private:

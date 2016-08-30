@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Dual Control schemes are possible: we have to set a local variable for throttle in the tank movement component, 
+// and consume it every frame.
 
 #pragma once
 
@@ -26,6 +27,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void IntendMoveRight(float Throw);
 
+	// Called from the pathfinding logic built in to UE4 API by the AI Controllers.
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:

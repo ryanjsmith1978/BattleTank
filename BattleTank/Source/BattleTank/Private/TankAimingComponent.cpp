@@ -86,16 +86,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
 }
-
 // A launch velocity is equivalent to a velocity vector which includes the magnitude (the speed), and the direction
 
 // Vector has magnitude (size) and direction.
 // Vector Magnitude is calculated using Pythagoras (sqrt of x^2 + y^2)
-// Vector with a magnitude of 1 is a UNIT VECTOR.
+// Vector with a magnitude of 1 is a UNIT VECTOR, which can be calculated by normalizing a vector (uses a point which can calculate a parallel plane).    
 
-// The DOT PRODUCT is a scalar value expressing the angular relationship between two vectors. (a * b = |a| * |b| * cos(theta)).
-// The dot product is thus the sum of the products of each component of the two vectors (a * b is the same as {(ax * bx) + (ay * by)} )
-// cos(theta) is the angle between two vectors.  
-// The dot product is used to calculate joules of work needed given a certain amount of force in a given direction over a distance in that same direction.
-// Work equals Force vector * Distance vector (The Force Vector is not the total force but the force projection * Cos(theta))
-// Force projection is the amount of force of needed for a particular component of that force vector (like fsub X) in the same direction of the distance vector
+
