@@ -15,7 +15,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(TEXT("TankAimingComponent"));
-	TankMovement = CreateDefaultSubobject<UTankMovementComponent>(TEXT("TankMovement"));
+	//TankMovement = CreateDefaultSubobject<UTankMovementComponent>(TEXT("TankMovement"));
 	ReloadTimeInSeconds = 2.0f;
 }
 

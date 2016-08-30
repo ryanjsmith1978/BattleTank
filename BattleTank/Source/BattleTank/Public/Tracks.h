@@ -17,6 +17,8 @@ public:
 	
 	UTracks();
 
+	FORCEINLINE float GetMaxDrivingForce() { return MaxDrivingForce; }
+
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 

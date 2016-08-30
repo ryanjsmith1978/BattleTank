@@ -17,11 +17,12 @@ public:
 
 	UTankMovementComponent();
 
-	UFUNCTION(BlueprintCallable, Category = "Movement")
-	void IntendMoveForward(float Throw);
-
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(class UTracks* LeftTrackToSet, class UTracks* RightTrackToSet);
+
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void IntendMoveForward(float Throw);
+	
 
 private:
 
