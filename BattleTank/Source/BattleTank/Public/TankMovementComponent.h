@@ -23,6 +23,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	void IntendMoveForward(float Throw);
 	
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void IntendMoveRight(float Throw);
 
 private:
 
