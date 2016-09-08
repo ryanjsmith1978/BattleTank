@@ -14,3 +14,4 @@ BattleTank/BuildingEscape.sdf
 *.VC.db
 *.VC.opendb
 BattleTank/BattleTank.sdf
+*.suo
